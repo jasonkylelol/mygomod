@@ -1,3 +1,3 @@
-#mygomod
-hello world!
-this is empty go module repo!
+# mygomod
+- hello world!
+- this is an empty go module repo!
