@@ -1,7 +1,5 @@
 package mygomod
 
-var resmaps = [][]string{}
-
 func validQueens(maps [][]rune, row, col int) bool {
 	for _, cols := range maps {
 		if cols[col] == 'Q' {
@@ -21,9 +19,9 @@ func validQueens(maps [][]rune, row, col int) bool {
 	return true
 }
 
-func getNQueens(maps *[][]rune, row int) {
+func getNQueens(resmaps *[][]string, maps *[][]rune, row int) {
 	if len(*maps) == row {
-		resmaps = append(resmaps, convMaps(*maps))
+		*resmaps = append(*resmaps, convMaps(*maps))
 		return
 	}
 	columnSize := len((*maps)[row])
@@ -32,7 +30,7 @@ func getNQueens(maps *[][]rune, row int) {
 			continue
 		}
 		(*maps)[row][col] = 'Q'
-		getNQueens(maps, row+1)
+		getNQueens(resmaps, maps, row+1)
 		(*maps)[row][col] = '.'
 	}
 }
@@ -58,7 +56,8 @@ func convMaps(maps [][]rune) []string {
 }
 
 func solveNQueens(n int) [][]string {
+	var resmaps = [][]string{}
 	maps := initMaps(n)
-	getNQueens(&maps, 0)
+	getNQueens(&resmaps, &maps, 0)
 	return resmaps
 }
