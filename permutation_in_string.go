@@ -1,6 +1,17 @@
 package mygomod
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
+
+func printMap(rmap map[rune]int) string {
+	sval := ""
+	for key, val := range rmap {
+		sval += fmt.Sprintf("%v:%v ", string(key), val)
+	}
+	return sval
+}
 
 func checkInclusion(s1 string, s2 string) bool {
 	ss1 := []rune(s1)
@@ -9,30 +20,24 @@ func checkInclusion(s1 string, s2 string) bool {
 	for _, c := range ss1 {
 		need[c]++
 	}
-	var left, right, valid int
+	var left, right int
 	for right < len(ss2) {
 		c1 := ss2[right]
 		right++
-		c1Val, ok := need[c1]
+		_, ok := need[c1]
 		if ok {
 			window[c1]++
-			if window[c1] == c1Val {
-				valid++
-			}
 		}
-		fmt.Printf("need:%v window:%v")
+		// fmt.Printf("need:%v window:%v c1:%v\n", printMap(need), printMap(window), string(c1))
 		for right-left >= len(ss1) {
-			if valid == len(need) {
+			if reflect.DeepEqual(window, need) {
 				return true
 			}
 			c2 := ss2[left]
 			left++
-			c2Val, ok := need[c2]
+			_, ok := need[c2]
 			if ok {
 				window[c2]--
-				if window[c2] == c2Val {
-					valid--
-				}
 			}
 		}
 	}

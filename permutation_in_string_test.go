@@ -21,6 +21,11 @@ var permutationInStringParams = []permutationInStringParam{
 		S2:  "eidbaooo",
 		Ret: true,
 	},
+	{
+		S1:  "ab",
+		S2:  "eidboaoo",
+		Ret: false,
+	},
 }
 
 func Test_permutationInString(t *testing.T) {

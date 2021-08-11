@@ -1,5 +1,7 @@
 package mygomod
 
-func main() {
+import "fmt"
 
+func main() {
+	fmt.Println("hello mygomod")
 }
