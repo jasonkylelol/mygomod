@@ -36,8 +36,14 @@ loop:
 			if err != nil {
 				fmt.Println("err:", err)
 			}
-			fmt.Println("routine", t.Id, "cnt:", cnt)
+			// fmt.Println("routine", t.Id, "cnt:", cnt)
+			if cnt > 2 {
+				fmt.Println("routine", t.Id, "cnt:", cnt, "continue")
+				t.MsgCh <- strconv.Itoa(cnt - 1)
+				continue
+			}
 			if cnt > 0 {
+				fmt.Println("routine", t.Id, "cnt:", cnt, "re-dispatch")
 				time.Sleep(1 * time.Second)
 				t.MsgCh <- strconv.Itoa(cnt - 1)
 			}
