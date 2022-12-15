@@ -1,4 +1,4 @@
-package main
+package mygomod
 
 import (
 	"encoding/base64"
@@ -28,9 +28,4 @@ func buildImgData(imgName, imgsPath string) (string, error) {
 	// fmt.Fprintf(&base64Encoding, "%v", base64.StdEncoding.EncodeToString(imgData))
 	// base64Encoding += base64.StdEncoding.EncodeToString(imgData)
 	return base64.StdEncoding.EncodeToString(imgData), nil
-}
-
-func main() {
-	imgData, _ := buildImgData("doge.jpeg", "/Users/jason/workspace/dummy")
-	fmt.Println(imgData)
 }
