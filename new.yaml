@@ -1,0 +1,104 @@
+type: single
+vendor: apulis
+app: ""
+version: ""
+name: 器件错漏反
+image: det.png
+description: test
+model_templates:
+    - title: 目标检测
+      field: cv
+      task: detection
+      sys_params:
+        - name: model_name
+          value: xxxxxx
+          arg: model_name
+          optional: false
+        - name: filter_label
+          value: ""
+          arg: ""
+          optional: false
+        - name: model_path
+          value: ""
+          arg: result_path
+          optional: false
+      user_params:
+        - name: application
+          title: ""
+          type: ""
+          value: nut_detection
+          editable: false
+          default: ""
+      maximum_num: 1
+      minimum_num: 0
+      avail_models: []
+      inspect_params: []
+      models: []
+inference:
+    kernel: apuisv
+    agent: ""
+    passthrough: "true"
+    proto: ext.proto
+    engine: ""
+    entrypoint: ""
+    healthy_delay: 500
+    devices:
+        - type: huawei_npu
+          series: a910,910b,910pro,910prob
+          device_num: 1
+          cpu: 2
+          memory: 8
+application:
+    sys_params:
+        - name: scene
+          value: ascend.det_cls
+          arg: ""
+          optional: false
+        - name: project_id
+          value: "123"
+          arg: ""
+          optional: false
+    user_params:
+        - name: maximum_tag_num
+          title: 最大xx数量
+          type: string
+          value: "10"
+          editable: true
+          default: "100"
+    single: true
+    inspect: null
+single:
+    preprocess:
+        type: cpp
+        custom_file: ""
+        extra_files: []
+        parameters: []
+    postprocess:
+        type: python
+        custom_file: postprocess.py
+        extra_files: [ext_pb2.py]
+        parameters:
+            - name: class_name_file
+              type: path
+              value: class_names.txt
+              mutable: false
+              editable: true
+            - name: conf_thrs
+              type: float
+              value: 0.002
+              mutable: false
+              editable: true
+    infer:
+        backend: tensorrt
+        device: npu,gpu,cpu
+        device_ids: 0,1
+        model_file: model.trt
+        params: null
+        inputs:
+            - name: images
+              type: fp32
+              shape: [1, 3, 2432, 2432]
+        outputs:
+            - name: output
+              type: fp32
+              shape: [-1, 7]
