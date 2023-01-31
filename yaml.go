@@ -137,8 +137,7 @@ type SdkSingleNestedInferParam struct {
 
 func yamlTest() {
 	sdkYaml := SdkYaml{}
-	// yamlFile := "/Users/jason/workspace/dummy/model_serve.yaml"
-	yamlFile := "/Users/jason/workspace/apulis/project/iqi/sdk/gpu-det/cpp_serve.yaml"
+	yamlFile := "/Users/jason/workspace/dummy/model_serve.yaml"
 	yamlContent, err := os.ReadFile(yamlFile)
 	if err != nil {
 		fmt.Println("read infer/transformer/serve.yaml", err)

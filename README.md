@@ -1,3 +1,2 @@
 # mygomod
-- hello world!
-- this is an empty go module repo!
+- this is an go module repo for test
