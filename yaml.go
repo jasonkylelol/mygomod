@@ -34,7 +34,7 @@ type ModelTemplate struct {
 	MaximumNum  int          `yaml:"maximum_num" json:"maximumNum"`
 	MinimumNum  int          `yaml:"minimum_num" json:"minimumNum"`
 	AvailModels []string     `yaml:"avail_models" json:"availModels"`
-	//@add: 增加评判参数模板
+
 	InspectParams []*UserParam `yaml:"inspect_params" json:"inspectParams"`
 	Models        []*SdkModel  `json:"models"`
 }
@@ -58,7 +58,7 @@ type Device struct {
 type Inspect struct {
 	Engine     string `yaml:"engine" json:"engine"`
 	Entrypoint string `yaml:"entrypoint" json:"entrypoint"`
-	//@mark: 评估参数模板在 model_templates中
+
 }
 type SdkApplication struct {
 	//SceneTag   string      `yaml:"sceneTag" json:"sceneTag"`
@@ -66,7 +66,7 @@ type SdkApplication struct {
 	UserParams []*UserParam `yaml:"user_params" json:"userParams"`
 	//@add: mark this app is a single model wrapped application
 	Single bool `yaml:"single" json:"single"`
-	//@add: mlops评判相关配置
+
 	Inspect *Inspect `yaml:"inspect" json:"inspect"`
 }
 type SdkModel struct {
@@ -81,15 +81,15 @@ type SdkModel struct {
 	TitleTag  string `json:"titleTag"`
 }
 type SysParam struct {
-	//平台约定的名称,应保持全局命名空间可见
+
 	Name string `yaml:"name" json:"name"`
-	//由平台在合适的时机填充
+
 	Value string `yaml:"value" json:"value"`
 	//Source string `yaml:"source" json:"source"`
-	//传递给具体应用的名称,由app局部命名空间可见即可
+
 	Arg string `yaml:"arg" json:"arg"`
 	//Type     string `yaml:"type" json:"type"`
-	//默认系统参数全部是必须的,除非optinal为true可以不传
+
 	Optional bool `yaml:"optional" json:"optional"`
 }
 type UserParam struct {
