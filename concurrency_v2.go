@@ -24,7 +24,7 @@ func concurrencyV2() {
 		for proj := 0; proj < 10; proj++ {
 
 			wg.Add(1)
-			//因为是闭包函数，其实现在保证了函数内引用变量的生命周期与函数的活动时间相同
+
 			go func(b, p int) {
 				defer wg.Done()
 
